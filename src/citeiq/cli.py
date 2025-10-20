@@ -2,12 +2,20 @@
 
 from __future__ import annotations
 
+import logging
 from pathlib import Path
 from typing import List, Optional
 
 import typer
 
 from .pipeline import PipelineConfig, ReferencePipeline
+
+# Configure logging for console output
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(message)s",
+    handlers=[logging.StreamHandler()],
+)
 
 app = typer.Typer(help="CiteIQ reference analysis CLI.")
 
@@ -36,9 +44,6 @@ def process(
     )
     pipeline = ReferencePipeline(config)
     result = pipeline.run()
-
-    typer.echo(f"Processed {len(result.records)} references.")
-    typer.echo(f"Report saved to {result.markdown_report_path}")
 
 
 if __name__ == "__main__":

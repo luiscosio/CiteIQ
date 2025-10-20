@@ -1,0 +1,2 @@
+[console_scripts]
+citeiq = citeiq.cli:app
